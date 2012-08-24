@@ -18,19 +18,19 @@ from socket import getfqdn
 
 TEMPLATE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-def install_manager_packages():
-    """ Install basic system packages required for the manager """
-    pkg_list = ["mysql-server", "python-mysqldb", "openssh-server", "make",
-            "git", "cron", "unzip"]
-    install_apt_packages(pkg_list)
+#def install_manager_packages():
+    #""" Install basic system packages required for the manager """
+    #pkg_list = ["mysql-server", "python-mysqldb", "openssh-server", "make",
+            #"git", "cron", "unzip"]
+    #install_apt_packages(pkg_list)
 
-def install_website_packages():
-    """ Install system packages required for the website """
-    pkg_list = ["apache2", "php5", "libapache2-mod-php5", "php5-mysql",
-            "memcached", "php5-memcache", "php5-curl", "zip", "nodejs",
-            "cvs", "openjdk-6-jdk", "ant", "icedtea-plugin",
-            "python-setuptools", "dvipng", "texlive-latex-base"]
-    install_apt_packages(pkg_list)
+#def install_website_packages():
+    #""" Install system packages required for the website """
+    #pkg_list = ["apache2", "php5", "libapache2-mod-php5", "php5-mysql",
+            #"memcached", "php5-memcache", "php5-curl", "zip", "nodejs",
+            #"cvs", "openjdk-6-jdk", "ant", "icedtea-plugin",
+            #"python-setuptools", "dvipng", "texlive-latex-base"]
+    #install_apt_packages(pkg_list)
 
 def setup_base_files(opts):
     """ Setup all the contest specific files and directories """
@@ -110,16 +110,16 @@ def setup_database(opts):
             run_cmd("mysql -u %s %s %s < %s" % (opts.database_user,
                 password_opt, opts.database_name, sp))
 
-def setup_language_repo(opts):
-    """ Download languages not part of OS distribution locally for workers """
-    download_dir = os.path.join(opts.local_repo, "website/langs")
-    try:
-        os.mkdir(download_dir)
-    except OSError:
-        if not os.path.isdir(download_dir):
-            raise
-    retrieve_cmd = os.path.join(opts.local_repo, "setup/retrieve_languages.py")
-    run_cmd("%s %s" % (retrieve_cmd, download_dir))
+#def setup_language_repo(opts):
+    #""" Download languages not part of OS distribution locally for workers """
+    #download_dir = os.path.join(opts.local_repo, "website/langs")
+    #try:
+        #os.mkdir(download_dir)
+    #except OSError:
+        #if not os.path.isdir(download_dir):
+            #raise
+    #retrieve_cmd = os.path.join(opts.local_repo, "setup/retrieve_languages.py")
+    #run_cmd("%s %s" % (retrieve_cmd, download_dir))
 
 def setup_website(opts):
     """ Configure apache to serve the website and set a server_info.php """
@@ -140,9 +140,6 @@ def setup_website(opts):
             with open("server_info.php", "w") as si_file:
                 si_file.write(si_contents)
         # setup pygments flavored markdown
-        run_cmd("easy_install ElementTree")
-        run_cmd("easy_install Markdown")
-        run_cmd("easy_install Pygments")
         if not os.path.exists("aichallenge.wiki"):
             run_cmd("git clone git://github.com/aichallenge/aichallenge.wiki.git")
             run_cmd("python setup.py")
@@ -157,7 +154,7 @@ def setup_website(opts):
         with CD(visualizer_path):
             run_cmd("ant deploy -Djava.plugin=%s -Ddeploy.path=%s"
                     % (plugin_path, website_root))
-    setup_language_repo(opts)
+    #setup_language_repo(opts)
 
     site_config = "/etc/apache2/sites-available/" + opts.website_hostname
     if not os.path.exists(site_config):
@@ -237,7 +234,7 @@ def get_options(argv):
     compiled_dir = os.path.join(root_dir, 'compiled')
     log_dir = os.path.join(root_dir, 'logs')
     default_install = {
-        "installs": set([install_manager_packages, install_website_packages]),
+        #"installs": set([install_manager_packages, install_website_packages]),
         "packages_only": False,
         "username": current_username,
         "database_root_password": "",
@@ -287,11 +284,11 @@ def get_options(argv):
 def main(argv=["server_setup.py"]):
     check_ubuntu_version()
     opts = get_options(argv)
-    with Environ("DEBIAN_FRONTEND", "noninteractive"):
-        for install in opts.installs:
-            install()
-    if opts.packages_only:
-        return
+    #with Environ("DEBIAN_FRONTEND", "noninteractive"):
+        #for install in opts.installs:
+            #install()
+    #if opts.packages_only:
+        #return
     setup_base_files(opts)
     setup_database(opts)
     setup_website(opts)
