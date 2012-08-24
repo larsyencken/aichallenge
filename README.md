@@ -1,10 +1,14 @@
 AI Challenge Source Code Repository
 ===================================
 
-*Codename: Epsilon*
+This code is a fork of the Fall 2011 [AI Challenge](http://aichallenge.org/).
+It is aimed at easier installation on Ubuntu 12.04 machines.
 
-This code provides the basis for the Fall 2011 [AI Challenge](http://aichallenge.org/).
-Epsilon is supposed to implement the ants game.
+Fork status
+-----------
+
+This is definitely a work in progress. If you need something to run now,
+you should use the [Ubuntu 11.04 version](http://github.com/aichallenge/aichallenge).
 
 Folder Contents
 ---------------
