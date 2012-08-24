@@ -18,7 +18,7 @@ dep 'coffeescript.lang' do
 end
 
 dep 'java.lang' do
-    requires 'openjdk-7-jdk'
+    requires 'openjdk-6-jdk.managed'
 end
 
 dep 'scala.lang' do

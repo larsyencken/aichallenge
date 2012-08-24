@@ -42,5 +42,6 @@ dep 'aichallenge-languages' do
         'golang.lang',
         'coffeescript.lang',
         'nodejs.lang',
-        'racket.lang'
+        'racket.lang',
+        'java.lang'
 end

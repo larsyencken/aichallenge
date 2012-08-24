@@ -81,7 +81,12 @@ end
 
 dep 'openjdk-7-jdk.managed' do
     installs 'openjdk-7-jdk'
-    provides []
+    provides ['javac']
+end
+
+dep 'openjdk-6-jdk.managed' do
+    installs 'openjdk-6-jdk'
+    provides ['javac']
 end
 
 dep 'openssh-server.managed' do
