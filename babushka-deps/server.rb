@@ -15,7 +15,9 @@ dep 'aichallenge-server' do
         'setuptools.managed',
         'pip.managed',
         'dvipng.managed',
-        'texlive-latex-base.managed'
+        'texlive-latex-base.managed',
+        'python-markdown.managed',
+        'python-pygments.managed'
 end
 
 dep 'ant.managed' do
@@ -76,11 +78,21 @@ dep 'php5-mysql.managed' do
 end
 
 dep 'pip.managed' do
-    installs 'pip'
+    installs 'python-pip'
+end
+
+dep 'python-markdown.managed' do
+    installs 'python-markdown'
+    provides []
+end
+
+dep 'python-pygments.managed' do
+    installs 'python-pygments'
+    provides []
 end
 
 dep 'setuptools.managed' do
-    installs 'setuptools'
+    installs 'python-setuptools'
     provides ['easy_install']
 end
 
